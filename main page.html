@@ -1644,7 +1644,7 @@ let data = JSON.stringify(arguments["0"],null,2)
     dataArray.push(quickData(link,img,title,title)); } 
     var topLayout = new Layout(new Insets(0,0,0,0),1,1,2,1,360,new Size(400,400),null,new Size(0,0),0,0); 
     output.push(new Output(CellDesings.Special3,Orientation.horizontal,DefaultLayouts.none,Paging.centered,new Section('',false),topLayout,shuffle(dataArray.slice()))); 
-    output.push(new Output(CellDesings.Special1,Orientation.horizontal,DefaultLayouts.triplets,Paging.leading,new Section('Hot',true),null,dataArray)); 
+    output.push(new Output(CellDesings.Special1,Orientation.horizontal,DefaultLayouts.triplets,Paging.leading,new Section('Hot Novel',true),null,dataArray)); 
     dataArray = [];
 
     let lastNovels = document.querySelectorAll('.index-novel')[1].querySelectorAll('.row'); 
@@ -1665,7 +1665,7 @@ let data = JSON.stringify(arguments["0"],null,2)
     let title = com.querySelector('h3').textContent.trim(); 
     let field1 = com.querySelector('.label-primary').textContent; 
     dataArray.push(new Data(img,title,'Light Novel',field1,'','','unknown',false,link)); } 
-    output.push(new Output(CellDesings.wide6,Orientation.vertical,DefaultLayouts.longDoubletsFull,Paging.leading,new Section('Completed',true),null,dataArray)); 
+    output.push(new Output(CellDesings.wide6,Orientation.vertical,DefaultLayouts.longDoubletsFull,Paging.leading,new Section('Novel Completed',true),null,dataArray)); 
     
     let MainPageObject = new MainPage(new ModuleRequest('','get',emptyKeyValue,null),
     new Extra([new Commands('',emptyKeyValue)],emptyKeyValue),new JavascriptConfig(true,false,''),output); 
