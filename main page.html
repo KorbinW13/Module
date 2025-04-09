@@ -1634,32 +1634,39 @@ let data = JSON.stringify(arguments["0"],null,2)
     var parsedJson = JSON.parse(savedData.innerHTML); 
     let output = []; 
     let emptyKeyValue = [new KeyValue('','')]; 
+
     var dataArray = []; 
     let hot = document.querySelectorAll('.index-novel')[0].querySelectorAll('.item'); 
-    for (novel of hot) { let img = novel.querySelector('img').src; 
-    img = new ModuleRequest(img,'get',emptyKeyValue,null); 
-    let link = 'https://novelbin.me' + novel.querySelector('a').href; 
-    link = new ModuleRequest(link,'get',emptyKeyValue,null); 
-    let title = novel.querySelector('.title').textContent.trim(); 
-    dataArray.push(quickData(link,img,title,title)); } 
-    var topLayout = new Layout(new Insets(0,0,0,0),1,1,2,1,360,new Size(400,400),null,new Size(0,0),0,0); 
-    output.push(new Output(CellDesings.Special3,Orientation.horizontal,DefaultLayouts.none,Paging.centered,new Section('',false),topLayout,shuffle(dataArray.slice()))); 
-    output.push(new Output(CellDesings.Special1,Orientation.horizontal,DefaultLayouts.triplets,Paging.leading,new Section('Hot Novel',true),null,dataArray)); 
+    for (novel of hot) { 
+        let img = novel.querySelector('img').src; 
+        img = new ModuleRequest(img,'get',emptyKeyValue,null); 
+        let link = 'https://novelbin.me' + novel.querySelector('a').href; 
+        link = new ModuleRequest(link,'get',emptyKeyValue,null); 
+        let title = novel.querySelector('.title').textContent.trim(); 
+        dataArray.push(quickData(link,img,title,title)); 
+    } 
+        var topLayout = new Layout(new Insets(0,0,0,0),1,1,2,1,360,new Size(400,400),null,new Size(0,0),0,0); 
+        output.push(new Output(CellDesings.Special3,Orientation.horizontal,DefaultLayouts.none,Paging.centered,new Section('',false),topLayout,shuffle(dataArray.slice()))); 
+        output.push(new Output(CellDesings.Special1,Orientation.horizontal,DefaultLayouts.triplets,Paging.leading,new Section('Hot Novel',true),null,dataArray)); 
+        
     dataArray = [];
-
     let lastNovels = document.querySelectorAll('.index-novel')[1].querySelectorAll('.row'); 
-    for (last of lastNovels) { let img = ''; img = new ModuleRequest(img,'get',emptyKeyValue,null); 
-    let link = 'https://novelbin.me' + last.querySelector('a').href; 
-    link = new ModuleRequest(link,'get',emptyKeyValue,null); 
-    let title = last.querySelector('h3').textContent.trim(); 
-    let field1 = 'Light Novel'; 
-    dataArray.push(quickData(link,img,title,field1)); } 
+
+    for (last of lastNovels) { 
+        let img = ''; img = new ModuleRequest(img,'get',emptyKeyValue,null); 
+        let link = 'https://novelbin.me' + last.querySelector('a').href; 
+        link = new ModuleRequest(link,'get',emptyKeyValue,null); 
+        let title = last.querySelector('h3').textContent.trim(); 
+        let field1 = 'Light Novel'; 
+        dataArray.push(quickData(link,img,title,field1)); } 
     
     topLayout = new Layout(new Insets(10,10,10,10),1,2,3,5,350,new Size(400,400),null,new Size(0,0),15,0); 
     output.push(new Output(CellDesings.small2,Orientation.horizontal,DefaultLayouts.none,Paging.leading,new Section('New Chapters',true),topLayout,dataArray)); 
+
     dataArray = []; 
     let allCompl = document.querySelector('#index-novel-completed').querySelector('.row').querySelectorAll('.col-md-2'); 
-    for (com of allCompl) { let img = com.querySelector('img').src; 
+    for (com of allCompl) {
+    let img = com.querySelector('.lazy').src; 
     img = new ModuleRequest(img,'get',emptyKeyValue,null); 
     let link = 'https://novelbin.me' + com.querySelector('a').href; link = new ModuleRequest(link,'get',emptyKeyValue,null); 
     let title = com.querySelector('h3').textContent.trim(); 
