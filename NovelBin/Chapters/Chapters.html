@@ -72,12 +72,13 @@
     
     var emptyKeyValue = [new KeyValue('', '')];
 
-    // Fill the output object with the data, depending on your module data type (images, text or video) nulllify the ones that you dont need.
-        // Scripts cant use comments so delete them before loading them into KETSU.
-    // add a \ if you are going to use ""
-
+    var emptyKeyValue = [new KeyValue('', '')];
+    let text = document.querySelector('#chr-content').textContent;text = replaceAll(text,'(adsbygoogle = window.adsbygoogle || []).push({});','');
     let emptyExtra = new Extra([new Commands('', emptyKeyValue)], emptyKeyValue);
-    var chaptersObject = new Chapters(new ModuleRequest('', '', emptyKeyValue, null), emptyExtra, new JavascriptConfig(false, false, ''), new Output(new Videos(null, output), null, null));
+    var chaptersObject = new Chapters(new ModuleRequest('', '', emptyKeyValue, null), emptyExtra, new JavascriptConfig(false, false, ''), new Output(null, null, new Text(text)));
+
+
+    var chaptersObject = new Chapters(new ModuleRequest('', '', emptyKeyValue, null), emptyExtra, new JavascriptConfig(false, false, ''), new Output(null, null, new Text(text)));
     var finalJson = JSON.stringify(chaptersObject);
     savedData.innerHTML = finalJson;
     
