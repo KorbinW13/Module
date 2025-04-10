@@ -1625,10 +1625,12 @@ let data = JSON.stringify(arguments["0"],null,2)
         this.openInWebView = openInWebView; } 
     function quickData(link,image,title,field1) { 
         return new Data(image,title,'Light Novel',field1,'Light Novel','unknown','unknown',false,link); } 
+        
     function shuffle(a) { 
         var j, x, i; 
         for (i = a.length - 1; i > 0; i--) 
-        { j = Math.floor(Math.random() * (i + 1)); x = a[i]; a[i] = a[j]; a[j] = x; } 
+        { j = Math.floor(Math.random() * (i + 1)); 
+            x = a[i]; a[i] = a[j]; a[j] = x; } 
         return a; } 
     var savedData = document.getElementById('bcpslsofda'); 
     var parsedJson = JSON.parse(savedData.innerHTML); 
@@ -1646,7 +1648,7 @@ let data = JSON.stringify(arguments["0"],null,2)
         dataArray.push(quickData(link,img,title,title)); 
     } 
         var topLayout = new Layout(new Insets(0,0,0,0),1,1,2,1,360,new Size(400,400),null,new Size(0,0),0,0); 
-        output.push(new Output(CellDesings.Special3,Orientation.horizontal,DefaultLayouts.none,Paging.centered,new Section('',false),topLayout,shuffle(dataArray.slice()))); 
+        output.push(new Output(CellDesings.wide6,Orientation.horizontal,DefaultLayouts.none,Paging.centered,new Section('',false),topLayout,shuffle(dataArray.slice()))); 
         output.push(new Output(CellDesings.Special1,Orientation.horizontal,DefaultLayouts.triplets,Paging.leading,new Section('Hot Novel',true),null,dataArray)); 
         
     dataArray = [];
@@ -1666,7 +1668,7 @@ let data = JSON.stringify(arguments["0"],null,2)
     dataArray = []; 
     let allCompl = document.querySelector('#index-novel-completed').querySelector('.row').querySelectorAll('.col-md-2'); 
     for (com of allCompl) {
-    let img = com.querySelector('.lazy').src; 
+    let img = com.querySelector('img.lazy').src; 
     img = new ModuleRequest(img,'get',emptyKeyValue,null); 
     let link = 'https://novelbin.me' + com.querySelector('a').href; link = new ModuleRequest(link,'get',emptyKeyValue,null); 
     let title = com.querySelector('h3').textContent.trim(); 
