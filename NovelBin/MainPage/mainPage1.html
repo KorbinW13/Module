@@ -1518,11 +1518,19 @@ output.push(new Output(CellDesings.normal1,Orientation.horizontal,DefaultLayouts
 dataArray = []; 
 let lastNovels = document.querySelectorAll('.index-novel')[1].querySelectorAll('.row'); 
 for (last of lastNovels) { 
-    let img = ''; img = new ModuleRequest(img,'get',emptyKeyValue,null); 
-    let link = 'https://novelbin.me' + last.querySelector('a').href; 
+    let img = ''; 
+    img = new ModuleRequest(img,'get',emptyKeyValue,null); 
+    let link = last.querySelector('a').href; 
     link = new ModuleRequest(link,'get',emptyKeyValue,null); 
     let title = last.querySelector('h3').textContent.trim(); 
-    let field1 = last.querySelector('.col-time').textContent; 
-    dataArray.push(quickData(link,img,title,field1)); } 
-    topLayout = new Layout(new Insets(10,10,10,10),1,2,3,5,350,new Size(400,400),null,new Size(0,0),15,0); 
-    output.push(new Output(CellDesings.small2,Orientation.horizontal,DefaultLayouts.none,Paging.leading,new Section('Latest Release',true),topLayout,dataArray));
+    let field1 = last.querySelector('.col-time').textContent;
+    console.log(field1) 
+    dataArray.push(quickData(link,img,title,field1)); 
+}  
+topLayout = new Layout(new Insets(10,10,10,10),1,2,3,5,350,new Size(400,400),null,new Size(0,0),15,0); 
+output.push(new Output(CellDesings.small2,Orientation.horizontal,DefaultLayouts.none,Paging.leading,new Section('Latest Release',true),topLayout,dataArray));
+
+
+let extraInfo = [new KeyValue('count','0'),new KeyValue('0','https://en.ninemanga.com/list/Hot-Book/'),new KeyValue('1','https://en.ninemanga.com/list/New-Update/'),new KeyValue('2','https://en.ninemanga.com/list/New-Book/')]; 
+let MainPageObject = new MainPage(new ModuleRequest('https://en.ninemanga.com/list/Hot-Book/','get',emptyKeyValue,null),new Extra([new Commands('',emptyKeyValue)],extraInfo),new JavascriptConfig(true,false,''),output);
+var layouts =[ { layout : DefaultLayouts.wideStrechedList, desing : CellDesings.wide2, title: 'Hot' }
