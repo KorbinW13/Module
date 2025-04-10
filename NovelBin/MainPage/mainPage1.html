@@ -1494,7 +1494,12 @@ function Data(image, title, description, field1, field2, field3, field4, isChapt
 function quickData(link,image,title,field1) { 
     return new Data(image,title,'field0',field1,'field2','unknown','unknown',false,link); }
 
-    dataArray.push(Data(image,title,'','','','unknown','unknown',false,link))
+function fullData(link, image, title, description, field1, field2, field3, field4) {
+    return new Data(image,title,description,field1,field2,field3,field4,false,link);
+}
+
+
+dataArray.push(Data(image,title,'','','','unknown','unknown',false,link))
 
 let hot = document.querySelectorAll('.index-novel')[0].querySelectorAll('.item'); 
 for (novel of hot) { 
@@ -1503,7 +1508,7 @@ for (novel of hot) {
     let link = novel.querySelector('a').href; 
     link = new ModuleRequest(link,'get',emptyKeyValue,null); 
     let title = novel.querySelector('.title').innerText.trim(); 
-    dataArray.push(Data(image,title,'','','','unknown','unknown',false,link)); } 
+    dataArray.push(fullData(link,image,title,'','','','','')); } 
 //output.push( new Output( CellDesings.wide11, Orientation.horizontal, DefaultLayouts.wideFull, Paging.leading, new Section( '', true ), null, dataArray ) );
 output.push(new Output(CellDesings.normal1,Orientation.horizontal,DefaultLayouts.longTripletsConstant,Paging.leading,new Section('Hot Novel',true),null,shuffle(dataArray.slice())));
 
