@@ -1488,17 +1488,6 @@ let data = JSON.stringify(arguments["0"],null,2)
  </body>
 </html>
 
-let emptyKeyValue = [ new KeyValue( 'Referer', 'https://www.mangapill.com/' ) ];
-let popularList = document.querySelector( '.featured-grid' ).querySelectorAll( 'div.rounded' ); 
-var dataArray = [ ]; 
-for ( popular of popularList ) { let image = popular.querySelector( 'img' ).dataset.src; let title = popular.querySelector( 'div > a:nth-child(2)' ).innerText.trim( ); 
-let field1 = 'C.' + popular.querySelector( 'img' ).alt.split( 'Chapter' )[ 1 ].trim( ); image = new ModuleRequest( image, 'get', emptyKeyValue, null ); 
-let link = transfromChapter( popular.querySelector( 'a' ).href ); 
-link = new ModuleRequest( link, 'get', emptyKeyValue, null ); 
-console.log(image) dataArray.push( quickData( link, image, title, field1 ) );}
-output.push( new Output( CellDesings.wide11, Orientation.horizontal, DefaultLayouts.wideFull, Paging.leading, new Section( '', true ), null, dataArray ) );
-output.push( new Output( CellDesings.normal1, Orientation.horizontal, DefaultLayouts.longTripletsConstant, Paging.leading, new Section( 'Popular', true ), null, shuffle( dataArray.slice( ) ) ) );
-
 let popularList = document.querySelector( '.featured-grid' ).querySelectorAll( 'div.rounded' );\nvar dataArray = [ ];
 for ( popular of popularList ) {
     let image = popular.querySelector( 'img' ).dataset.src;
@@ -1522,7 +1511,6 @@ for (novel of hot) {
     let link = 'https://novelbin.me' + novel.querySelector('a').href; 
     link = new ModuleRequest(link,'get',emptyKeyValue,null); 
     let title = novel.querySelector('.title').innerText.trim(); 
-    dataArray.push(quickData(link,image,title,title)); } 
-var topLayout = new Layout(new Insets(0,0,0,0),1,1,2,1,360,new Size(400,400),null,new Size(0,0),0,0); 
-output.push(new Output(CellDesings.Special3,Orientation.horizontal,DefaultLayouts.none,Paging.centered,new Section('',false),topLayout,shuffle(dataArray.slice()))); 
-output.push(new Output(CellDesings.Special1,Orientation.horizontal,DefaultLayouts.triplets,Paging.leading,new Section('Hot Novel',true),null,dataArray));
+    dataArray.push(quickData(link,image,title,'')); } 
+output.push( new Output( CellDesings.wide11, Orientation.horizontal, DefaultLayouts.wideFull, Paging.leading, new Section( '', true ), null, dataArray ) );
+output.push(new Output(CellDesings.normal1,Orientation.horizontal,DefaultLayouts.longTripletsConstant,Paging.leading,new Section('Popular',true),null,shuffle(dataArray.slice())));
