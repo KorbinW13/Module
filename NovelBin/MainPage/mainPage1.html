@@ -1508,12 +1508,12 @@ let hot = document.querySelectorAll('.index-novel')[0].querySelectorAll('.item')
 for (novel of hot) { 
     let image = novel.querySelector('img').dataset.src; 
     image = new ModuleRequest(image,'get',emptyKeyValue,null); 
-    let link = 'https://novelbin.me' + novel.querySelector('a').href; 
+    let link = novel.querySelector('a').href; 
     link = new ModuleRequest(link,'get',emptyKeyValue,null); 
     let title = novel.querySelector('.title').innerText.trim(); 
     dataArray.push(quickData(link,image,title,'')); } 
-output.push( new Output( CellDesings.wide11, Orientation.horizontal, DefaultLayouts.wideFull, Paging.leading, new Section( '', true ), null, dataArray ) );
-output.push(new Output(CellDesings.normal1,Orientation.horizontal,DefaultLayouts.longTripletsConstant,Paging.leading,new Section('Popular',true),null,shuffle(dataArray.slice())));
+//output.push( new Output( CellDesings.wide11, Orientation.horizontal, DefaultLayouts.wideFull, Paging.leading, new Section( '', true ), null, dataArray ) );
+output.push(new Output(CellDesings.normal1,Orientation.horizontal,DefaultLayouts.longTripletsConstant,Paging.leading,new Section('Hot Novel',true),null,shuffle(dataArray.slice())));
 
 dataArray = []; 
 let lastNovels = document.querySelectorAll('.index-novel')[1].querySelectorAll('.row'); 
