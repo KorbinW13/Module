@@ -1512,6 +1512,17 @@ for (novel of hot) {
 output.push(new Output(CellDesings.normal1,Orientation.horizontal,DefaultLayouts.longTripletsConstant,Paging.leading,new Section('Hot Novel',true),null,shuffle(dataArray.slice())));
 
 dataArray = []; 
+let allCompl = document.querySelector('#index-novel-completed').querySelector('.row').querySelectorAll('.col-md-2'); 
+for (com of allCompl) { 
+    let img = com.querySelector('img').dataset.src; 
+    img = new ModuleRequest(img,'get',emptyKeyValue,null); 
+    let link = com.querySelector('a').href; link = new ModuleRequest(link,'get',emptyKeyValue,null); let title = com.querySelector('h3').textContent.trim(); 
+    let field1 = com.querySelector('.label-primary').textContent; 
+    dataArray.push(new Data(img,title,'Light Novel',field1,'','','unknown',false,link)); } 
+output.push(new Output(CellDesings.wide6,Orientation.vertical,DefaultLayouts.longDoubletsFull,Paging.leading,new Section('Novel Completed',true),null,dataArray));
+
+
+dataArray = []; 
 let lastNovels = document.querySelectorAll('.index-novel')[1].querySelectorAll('.row'); 
 for (last of lastNovels) { 
     let img = ''; 
@@ -1519,7 +1530,7 @@ for (last of lastNovels) {
     let link = last.querySelector('a').href; 
     link = new ModuleRequest(link,'get',emptyKeyValue,null); 
     let title = last.querySelector('h3').textContent.trim(); 
-    let field1 = last.querySelector('div')[3].textContent;
+    let field1 = last.querySelector('.col-time').textContent.trim();
     console.log(field1) 
     dataArray.push(quickData(link,img,title,field1)); 
 }  
