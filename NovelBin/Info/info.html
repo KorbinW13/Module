@@ -101,6 +101,12 @@ var finalJson = JSON.stringify(infoPageObject);
 savedData.innerHTML = finalJson;
 </script>
 
+let chapters = Array.from( document.querySelector( '#chapters > div' ).querySelectorAll( 'a' ) ).map( function ( data ) {
+    return new Chapter( data.textContent.trim( ), new ModuleRequest( 'https://mangapill.com' + data.href, 'get', emptyKeyValue, null ), false );
+} ).reverse();
+
+let infoPageObject = new Info( new ModuleRequest( '', '', emptyKeyValue, null ), new Extra( [ new Commands( '', emptyKeyValue ) ], emptyKeyValue ), new JavascriptConfig( false, false, '' ), new Output( image, title, parsedJson.request, desc, genres, type, status, '', 'Chapters: ' + chapters.length, chapters ) );
+
 var episodes = []; 
 var type = 'Light Novel'; 
 var status = 'Unknown'; 
