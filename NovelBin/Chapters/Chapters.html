@@ -78,7 +78,7 @@
     var chaptersObject = new Chapters(new ModuleRequest('', '', emptyKeyValue, null), emptyExtra, new JavascriptConfig(false, false, ''), new Output(null, null, new Text(text)));
 
 
-    var chaptersObject = new Chapters(new ModuleRequest('', '', emptyKeyValue, null), emptyExtra, new JavascriptConfig(false, false, ''), new Output(null, null, new Text(text)));
+    var chaptersObject = new Chapters(new ModuleRequest('', '', emptyKeyValue, null), emptyExtra, new JavascriptConfig(false, false, ''), new Output(null, null, text));
     var finalJson = JSON.stringify(chaptersObject);
     savedData.innerHTML = finalJson;
     
