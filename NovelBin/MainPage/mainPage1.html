@@ -1519,23 +1519,21 @@ for (com of allCompl) {
     let link = com.querySelector('a').href; link = new ModuleRequest(link,'get',emptyKeyValue,null); let title = com.querySelector('h3').textContent.trim(); 
     let field1 = com.querySelector('.label-primary').textContent; 
     dataArray.push(new Data(img,title,'Light Novel',field1,'','','unknown',false,link)); } 
-output.push(new Output(CellDesings.wide6,Orientation.vertical,DefaultLayouts.longDoubletsFull,Paging.leading,new Section('Novel Completed',true),null,dataArray));
+output.push(new Output(CellDesings.wide6,Orientation.horizontal,DefaultLayouts.longDoubletsFull,Paging.leading,new Section('Novel Completed',true),null,dataArray));
 
 
-dataArray = []; 
 let lastNovels = document.querySelectorAll('.index-novel')[1].querySelectorAll('.row'); 
 for (last of lastNovels) { 
-    let img = ''; 
-    img = new ModuleRequest(img,'get',emptyKeyValue,null); 
-    let link = last.querySelector('a').href; 
-    link = new ModuleRequest(link,'get',emptyKeyValue,null); 
-    let title = last.querySelector('h3').textContent.trim(); 
-    let field1 = last.querySelector('.col-time').textContent.trim();
-    console.log(field1) 
-    dataArray.push(quickData(link,img,title,field1)); 
-}  
+    let img = ''; img = new ModuleRequest(img,'get',emptyKeyValue,null); 
+    let link = last.querySelector('a').href; link = new ModuleRequest(link,'get',emptyKeyValue,null); 
+    let title = last.querySelector('h3').textContent.trim();
+    let chapInfo = last.querySelector('.col-chap').textContent.trim();
+    let time = last.querySelector('.col-time').textContent.trim();
+    let desc = chapInfo +'<br>'+ time;
+    dataArray.push(fullData(link,img,title,desc,'','field2','field3','field4')); } 
 topLayout = new Layout(new Insets(10,10,10,10),1,2,3,5,350,new Size(400,400),null,new Size(0,0),15,0); 
-output.push(new Output(CellDesings.small2,Orientation.horizontal,DefaultLayouts.none,Paging.leading,new Section('Latest Release',true),topLayout,dataArray));
+output.push(new Output(CellDesings.wide2,Orientation.horizontal,DefaultLayouts.wideStrechedList,Paging.leading,new Section('Latest Release',true),topLayout,dataArray));
+
 
 
 let extraInfo = [new KeyValue('count','0'),new KeyValue('0','https://en.ninemanga.com/list/Hot-Book/'),new KeyValue('1','https://en.ninemanga.com/list/New-Update/'),new KeyValue('2','https://en.ninemanga.com/list/New-Book/')]; 
