@@ -1571,7 +1571,9 @@ output.push(new Output(CellDesings.wide6,Orientation.horizontal,DefaultLayouts.l
 let lastNovels = document.querySelectorAll('.index-novel')[1].querySelectorAll('.row'); 
 for (last of lastNovels) { 
     let link = last.querySelector('a').href; 
-    let img = link.replace('novel-book','media/novel') + '.png';
+    let imglink = link.replace('novel-book','media/novel') + '.png';
+    let img = new Image();
+    img.src = imglink;
     img = new ModuleRequest(img,'get',emptyKeyValue,null);
     link = new ModuleRequest(link,'get',emptyKeyValue,null); 
     let title = last.querySelector('h3').textContent.trim();

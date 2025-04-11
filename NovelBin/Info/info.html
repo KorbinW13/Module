@@ -76,7 +76,7 @@ var savedData = document.getElementById('ketsu-final-data');
 var parsedJson = JSON.parse(savedData.innerHTML);
 let emptyKeyValue = [new KeyValue('Referer', parsedJson.request.url)];
 
-var episodes = [];
+var chapters = [];
 var type = 'Light Novel';
 var status = 'Unknown';
 var field2 = ''; 
@@ -94,12 +94,25 @@ desc = document.querySelector('.desc-text').textContent.trim();
 title = document.querySelector('.title').textContent; 
 image = document.querySelector('.book').querySelector('img').src; 
 image = new ModuleRequest(image,'get',emptyKeyValue,null); 
+let chapList = document.querySelectorAll('#list-chapter > li');
+for (chap of chapList){
+    let chapLink = chap.querySelector('a').href;
+    let chapName = chap.querySelector('#chapter-title').textContent.trim();
+    let chapter = new Chapter(chapName,new ModuleRequest(chapLink,'get',emptyKeyValue,null),false);
+    chapters.push(chapter);
+}
 let id = document.querySelector('#rating').getAttribute('data-novel-id');
 
-let infoPageObject = new Info(new ModuleRequest('https://novelbin.me/ajax/chapter-archive?novelId=' + id, 'get', emptyKeyValue, null), new Extra([new Commands('', emptyKeyValue)], emptyKeyValue), new JavascriptConfig(false, false, ''), new Output(image, title, parsedJson.request, desc, genres, status, 'Anime', type, 'Chapters: '  + episodes.length, episodes));
+let infoPageObject = new Info(new ModuleRequest('', '', emptyKeyValue, null), new Extra([new Commands('', emptyKeyValue)], emptyKeyValue), new JavascriptConfig(false, false, ''), new Output(image, title, parsedJson.request, desc, genres, status, 'Anime', type, 'Chapters: '  + chapters.length, chapters));
 var finalJson = JSON.stringify(infoPageObject);
 savedData.innerHTML = finalJson;
 </script>
+
+{}var chaptersArray = document.querySelector('.silde').querySelectorAll('li');
+for (var x = 0; x < chaptersArray.length; x++) { 
+    var chapLink = chaptersArray[x].querySelector('a').href.replace('.html', '-10-1.html'); 
+    let chapter = new Chapter('Chapter ' + (chaptersArray.length - x),new ModuleRequest(chapLink,'get',emptyKeyValue,null),false); 
+    chapters.push(chapter);}chapters.reverse();
 
 let chapters = Array.from( document.querySelector( '#chapters > div' ).querySelectorAll( 'a' ) ).map( function ( data ) {
     return new Chapter( data.textContent.trim( ), new ModuleRequest( 'https://mangapill.com' + data.href, 'get', emptyKeyValue, null ), false );
@@ -115,4 +128,12 @@ var genres = [];
 var desc = ''; 
 var title = ''; 
 var image = ''; 
-let data = document.querySelector('.info-meta').querySelectorAll('li'); genres = getStuff(data,'Genre:').split(', '); status = getStuff(data,'Status:'); desc = document.querySelector('.desc-text').textContent.trim(); title = document.querySelector('.title').textContent; image = document.querySelector('.book').querySelector('img').src; image = new ModuleRequest(image,'get',emptyKeyValue,null); let id = document.querySelector('#rating').getAttribute('data-novel-id'); let infoPageObject = new Info(new ModuleRequest('https://readnovelfull.com/ajax/chapter-archive?novelId=' + id, 'get', emptyKeyValue, null), new Extra([new Commands('', emptyKeyValue)], emptyKeyValue), new JavascriptConfig(false, false, ''), new Output(image, title, parsedJson.request, desc, genres, status, field2, type, 'Chapters: ' + episodes.length, episodes)); var finalJson = JSON.stringify(infoPageObject); savedData.innerHTML = finalJson;
+let data = document.querySelector('.info-meta').querySelectorAll('li'); genres = getStuff(data,'Genre:').split(', '); 
+status = getStuff(data,'Status:'); 
+desc = document.querySelector('.desc-text').textContent.trim(); 
+title = document.querySelector('.title').textContent; image = document.querySelector('.book').querySelector('img').src; 
+image = new ModuleRequest(image,'get',emptyKeyValue,null); 
+let id = document.querySelector('#rating').getAttribute('data-novel-id'); 
+let infoPageObject = new Info(new ModuleRequest('https://readnovelfull.com/ajax/chapter-archive?novelId=' + id, 'get', emptyKeyValue, null), new Extra([new Commands('', emptyKeyValue)], emptyKeyValue), new JavascriptConfig(false, false, ''), new Output(image, title, parsedJson.request, desc, genres, status, field2, type, 'Chapters: ' + episodes.length, episodes)); 
+var finalJson = JSON.stringify(infoPageObject); 
+savedData.innerHTML = finalJson;
