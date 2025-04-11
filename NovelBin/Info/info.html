@@ -76,7 +76,7 @@ var savedData = document.getElementById('ketsu-final-data');
 var parsedJson = JSON.parse(savedData.innerHTML);
 let emptyKeyValue = [new KeyValue('Referer', parsedJson.request.url)];
 
-var chapters = [];
+//var chapters = [];
 var type = 'Light Novel';
 var status = 'Unknown';
 var field2 = ''; 
@@ -93,7 +93,11 @@ status = getStuff(data,'Status:');
 desc = document.querySelector('.desc-text').textContent.trim(); 
 title = document.querySelector('.title').textContent; 
 image = document.querySelector('.book').querySelector('img').src; 
-image = new ModuleRequest(image,'get',emptyKeyValue,null); 
+image = new ModuleRequest(image,'get',emptyKeyValue,null);
+let chapters = Array.from(document.querySelector('#list-chaper > .panel-body').querySelectorAll('a')).map(function(data){
+    return new Chapter( data.textContent.trim(),new ModuleRequest(data.href,'get', emptyKeyValue, null), false);
+})
+
 let chapList = document.querySelectorAll('#list-chapter > li');
 for (chap of chapList){
     let chapLink = chap.querySelector('a').href;
@@ -101,22 +105,15 @@ for (chap of chapList){
     let chapter = new Chapter(chapName,new ModuleRequest(chapLink,'get',emptyKeyValue,null),false);
     chapters.push(chapter);
 }
-let id = document.querySelector('#rating').getAttribute('data-novel-id');
 
 let infoPageObject = new Info(new ModuleRequest('', '', emptyKeyValue, null), new Extra([new Commands('', emptyKeyValue)], emptyKeyValue), new JavascriptConfig(false, false, ''), new Output(image, title, parsedJson.request, desc, genres, status, 'Anime', type, 'Chapters: '  + chapters.length, chapters));
 var finalJson = JSON.stringify(infoPageObject);
 savedData.innerHTML = finalJson;
 </script>
 
-{}var chaptersArray = document.querySelector('.silde').querySelectorAll('li');
-for (var x = 0; x < chaptersArray.length; x++) { 
-    var chapLink = chaptersArray[x].querySelector('a').href.replace('.html', '-10-1.html'); 
-    let chapter = new Chapter('Chapter ' + (chaptersArray.length - x),new ModuleRequest(chapLink,'get',emptyKeyValue,null),false); 
-    chapters.push(chapter);}chapters.reverse();
-
 let chapters = Array.from( document.querySelector( '#chapters > div' ).querySelectorAll( 'a' ) ).map( function ( data ) {
     return new Chapter( data.textContent.trim( ), new ModuleRequest( 'https://mangapill.com' + data.href, 'get', emptyKeyValue, null ), false );
-} ).reverse();
+} );
 
 let infoPageObject = new Info( new ModuleRequest( '', '', emptyKeyValue, null ), new Extra( [ new Commands( '', emptyKeyValue ) ], emptyKeyValue ), new JavascriptConfig( false, false, '' ), new Output( image, title, parsedJson.request, desc, genres, type, status, '', 'Chapters: ' + chapters.length, chapters ) );
 
@@ -137,3 +134,28 @@ let id = document.querySelector('#rating').getAttribute('data-novel-id');
 let infoPageObject = new Info(new ModuleRequest('https://readnovelfull.com/ajax/chapter-archive?novelId=' + id, 'get', emptyKeyValue, null), new Extra([new Commands('', emptyKeyValue)], emptyKeyValue), new JavascriptConfig(false, false, ''), new Output(image, title, parsedJson.request, desc, genres, status, field2, type, 'Chapters: ' + episodes.length, episodes)); 
 var finalJson = JSON.stringify(infoPageObject); 
 savedData.innerHTML = finalJson;
+
+let emptyKeyValue = [ new KeyValue( 'Referer', 'https://www.mangapill.com/' ) ];var type = 'Manga';
+var status = document.querySelector( 'div.grid.grid-cols-1.md\\\\:grid-cols-3.gap-3.mb-3 > div:nth-child(2) > div' ).textContent.trim( );
+var genres = [ ];
+var desc = '';
+var title = '';
+var image = '';
+image = new ModuleRequest( image, 'get', emptyKeyValue, null );
+image = document.querySelector( '.container img' ).dataset.src;
+image = new ModuleRequest( image, 'get', emptyKeyValue, null );
+try {
+    desc = document.querySelector( 'div.flex.flex-col.sm\\\\:flex-row.my-3 > div.flex.flex-col p' ).textContent;
+} catch ( e ) {
+    desc = '';
+}
+title = document.querySelector( 'h1' ).innerHTML;
+try {
+    genres = Array.from( document.querySelector( 'div.flex.flex-col.sm\\\\:flex-row.my-3 > div.flex.flex-col > div:nth-child(4)' ).innerText.replace( 'Genres ', '' ).split( ' ' ) );
+} catch {
+    genres = [ ];
+}
+let chapters = Array.from( document.querySelector( '#chapters > div' ).querySelectorAll( 'a' ) ).map( function ( data ) {
+    return new Chapter( data.textContent.trim( ), new ModuleRequest( 'https://mangapill.com' + data.href, 'get', emptyKeyValue, null ), false );
+} );
+let infoPageObject = new Info( new ModuleRequest( '', '', emptyKeyValue, null ), new Extra( [ new Commands( '', emptyKeyValue ) ], emptyKeyValue ), new JavascriptConfig( false, false, '' ), new Output( image, title, parsedJson.request, desc, genres, type, status, '', 'Chapters: ' + chapters.length, chapters ) );
