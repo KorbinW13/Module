@@ -76,44 +76,35 @@ var savedData = document.getElementById('ketsu-final-data');
 var parsedJson = JSON.parse(savedData.innerHTML);
 let emptyKeyValue = [new KeyValue('Referer', parsedJson.request.url)];
 
-//var chapters = [];
+var chapters = [];
 var type = 'Light Novel';
-var status = 'Unknown';
+var status = getStuff(document.querySelector('.info-meta').querySelectorAll('li'),'Status:');
 var field2 = ''; 
-var genres = [];
-var desc = '';
-var title = '';
-var image = '';
+var genres = getStuff(document.querySelector('.info-meta').querySelectorAll('li'),'Genre:').split(', '); 
+var desc = document.querySelector('.desc-text').textContent.trim(); 
+var title = document.querySelector('.title').textContent;
+var image = document.querySelector('.book').querySelector('img').dataset.src;
+image = new ModuleRequest(image,'get',emptyKeyValue,null); 
 image = new ModuleRequest(image,'get',emptyKeyValue,null);
 var genresArray = [];
 
-let data = document.querySelector('.info-meta').querySelectorAll('li'); 
-genres = getStuff(data,'Genre:').split(', '); 
-status = getStuff(data,'Status:'); 
-desc = document.querySelector('.desc-text').textContent.trim(); 
-title = document.querySelector('.title').textContent; 
-image = document.querySelector('.book').querySelector('img').src; 
-image = new ModuleRequest(image,'get',emptyKeyValue,null);
-/*let chapters = Array.from(document.querySelector('#list-chaper > .panel-body').querySelectorAll('a')).map(function(data){
-    return new Chapter( data.textContent.trim(),new ModuleRequest(data.href,'get', emptyKeyValue, null), false);
-})*/
-
-let chapList = document.querySelector('#list-chapter');
-for (chap of chapList){
-    let chapLink = chap.querySelector('a').href;
-    let chapName = chap.querySelector('#chapter-title').textContent.trim();
-    let chapter = new Chapter(chapName,new ModuleRequest(chapLink,'get',emptyKeyValue,null),false);
-    chapters.push(chapter);
-}
+//let data = document.querySelector('.info-meta').querySelectorAll('li'); 
+//let id = document.querySelector('#rating').getAttribute('data-novel-id');
 
 let infoPageObject = new Info(new ModuleRequest('', '', emptyKeyValue, null), new Extra([new Commands('', emptyKeyValue)], emptyKeyValue), new JavascriptConfig(false, false, ''), new Output(image, title, parsedJson.request, desc, genres, status, 'Anime', type, 'Chapters: '  + chapters.length, chapters));
 var finalJson = JSON.stringify(infoPageObject);
 savedData.innerHTML = finalJson;
 </script>
 
+{}var chaptersArray = document.querySelector('.silde').querySelectorAll('li');
+for (var x = 0; x < chaptersArray.length; x++) { 
+    var chapLink = chaptersArray[x].querySelector('a').href.replace('.html', '-10-1.html'); 
+    let chapter = new Chapter('Chapter ' + (chaptersArray.length - x),new ModuleRequest(chapLink,'get',emptyKeyValue,null),false); 
+    chapters.push(chapter);}chapters.reverse();
+
 let chapters = Array.from( document.querySelector( '#chapters > div' ).querySelectorAll( 'a' ) ).map( function ( data ) {
     return new Chapter( data.textContent.trim( ), new ModuleRequest( 'https://mangapill.com' + data.href, 'get', emptyKeyValue, null ), false );
-} );
+} ).reverse();
 
 let infoPageObject = new Info( new ModuleRequest( '', '', emptyKeyValue, null ), new Extra( [ new Commands( '', emptyKeyValue ) ], emptyKeyValue ), new JavascriptConfig( false, false, '' ), new Output( image, title, parsedJson.request, desc, genres, type, status, '', 'Chapters: ' + chapters.length, chapters ) );
 
@@ -134,6 +125,10 @@ let id = document.querySelector('#rating').getAttribute('data-novel-id');
 let infoPageObject = new Info(new ModuleRequest('https://readnovelfull.com/ajax/chapter-archive?novelId=' + id, 'get', emptyKeyValue, null), new Extra([new Commands('', emptyKeyValue)], emptyKeyValue), new JavascriptConfig(false, false, ''), new Output(image, title, parsedJson.request, desc, genres, status, field2, type, 'Chapters: ' + episodes.length, episodes)); 
 var finalJson = JSON.stringify(infoPageObject); 
 savedData.innerHTML = finalJson;
+
+
+        "javaScript": " function Info(request, extra, javascriptConfig, output) { this.request = request; this.extra = extra; this.javascriptConfig = javascriptConfig; this.output = output; } function ModuleRequest(url, method, headers, httpBody) { this.url = url; this.method = method; this.headers = headers; this.httpBody = httpBody; } function Extra(commands, extraInfo) { this.commands = commands; this.extraInfo = extraInfo; } function Commands(commandName, params) { this.commandName = commandName; this.params = params; } function JavascriptConfig(removeJavascript, loadInWebView, javaScript) { this.removeJavascript = removeJavascript; this.loadInWebView = loadInWebView; this.javaScript = javaScript; } function KeyValue(key, value) { this.key = key; this.value = value; } function Chapter(chapName, link,openInWebView) { this.chapName = chapName; this.link = link; this.openInWebView = openInWebView; } function Output(image, title, link, description, genres, field1, field2, field3, field4, chapters) { this.image = image; this.link = link; this.title = title; this.description = description; this.genres = genres; this.field1 = field1; this.field2 = field2; this.field3 = field3; this.field4 = field4; this.chapters = chapters; } function getStuff(array,match) { for (var x = 0 ; x< array.length;x++) { let data = array[x].innerText; if (data.includes(match)) { return data.replace(match,'').trim(); } } } function getHtmlStuff(array,match) { for (var x = 0 ; x< array.length;x++) { let data = array[x].innerText; if (data.includes(match)) { return array[x]; } } } var savedData = document.getElementById('ketsu-final-data'); var parsedJson = JSON.parse(savedData.innerHTML); let emptyKeyValue = [new KeyValue('Referer', parsedJson.request.url)]; var episodes = []; var type = 'Light Novel'; var status = 'Unknown'; var field2 = ''; var genres = []; var desc = ''; var title = ''; var image = ''; let data = document.querySelector('.info-meta').querySelectorAll('li'); genres = getStuff(data,'Genre:').split(', '); status = getStuff(data,'Status:'); desc = document.querySelector('.desc-text').textContent.trim(); title = document.querySelector('.title').textContent; image = document.querySelector('.book').querySelector('img').src; image = new ModuleRequest(image,'get',emptyKeyValue,null); let id = document.querySelector('#rating').getAttribute('data-novel-id'); let infoPageObject = new Info(new ModuleRequest('https://readnovelfull.com/ajax/chapter-archive?novelId=' + id, 'get', emptyKeyValue, null), new Extra([new Commands('', emptyKeyValue)], emptyKeyValue), new JavascriptConfig(false, false, ''), new Output(image, title, parsedJson.request, desc, genres, status, field2, type, 'Chapters: ' + episodes.length, episodes)); var finalJson = JSON.stringify(infoPageObject); savedData.innerHTML = finalJson;"
+
 
 let emptyKeyValue = [ new KeyValue( 'Referer', 'https://www.mangapill.com/' ) ];var type = 'Manga';
 var status = document.querySelector( 'div.grid.grid-cols-1.md\\\\:grid-cols-3.gap-3.mb-3 > div:nth-child(2) > div' ).textContent.trim( );
@@ -157,7 +152,5 @@ try {
 }
 let chapters = Array.from( document.querySelector( '#chapters > div' ).querySelectorAll( 'a' ) ).map( function ( data ) {
     return new Chapter( data.textContent.trim( ), new ModuleRequest( 'https://mangapill.com' + data.href, 'get', emptyKeyValue, null ), false );
-} );
+} ).reverse( );
 let infoPageObject = new Info( new ModuleRequest( '', '', emptyKeyValue, null ), new Extra( [ new Commands( '', emptyKeyValue ) ], emptyKeyValue ), new JavascriptConfig( false, false, '' ), new Output( image, title, parsedJson.request, desc, genres, type, status, '', 'Chapters: ' + chapters.length, chapters ) );
-
-let chapters = Array.from(document.querySelector('#list-chaper > .panel-body').querySelectorAll('a')).map(function(data){ return new Chapter( data.textContent.trim(),new ModuleRequest(data.href,'get', emptyKeyValue, null), false); })
