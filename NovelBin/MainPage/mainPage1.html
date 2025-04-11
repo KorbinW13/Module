@@ -1529,7 +1529,7 @@ for (last of lastNovels) {
     let title = last.querySelector('h3').textContent.trim();
     let chapInfo = last.querySelector('.col-chap').textContent.trim();
     let time = last.querySelector('.col-time').textContent.trim();
-    let desc = chapInfo +'<br>'+ time;
+    let desc = chapInfo +'\n'+ time;
     dataArray.push(fullData(link,img,title,desc,'','field2','field3','field4')); } 
 topLayout = new Layout(new Insets(10,10,10,10),1,2,3,5,350,new Size(400,400),null,new Size(0,0),15,0); 
 output.push(new Output(CellDesings.wide2,Orientation.horizontal,DefaultLayouts.wideStrechedList,Paging.leading,new Section('Latest Release',true),topLayout,dataArray));
