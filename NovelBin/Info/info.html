@@ -94,11 +94,11 @@ desc = document.querySelector('.desc-text').textContent.trim();
 title = document.querySelector('.title').textContent; 
 image = document.querySelector('.book').querySelector('img').src; 
 image = new ModuleRequest(image,'get',emptyKeyValue,null);
-let chapters = Array.from(document.querySelector('#list-chaper > .panel-body').querySelectorAll('a')).map(function(data){
+/*let chapters = Array.from(document.querySelector('#list-chaper > .panel-body').querySelectorAll('a')).map(function(data){
     return new Chapter( data.textContent.trim(),new ModuleRequest(data.href,'get', emptyKeyValue, null), false);
-})
+})*/
 
-let chapList = document.querySelectorAll('#list-chapter > li');
+let chapList = document.querySelector('#list-chapter');
 for (chap of chapList){
     let chapLink = chap.querySelector('a').href;
     let chapName = chap.querySelector('#chapter-title').textContent.trim();
@@ -159,3 +159,5 @@ let chapters = Array.from( document.querySelector( '#chapters > div' ).querySele
     return new Chapter( data.textContent.trim( ), new ModuleRequest( 'https://mangapill.com' + data.href, 'get', emptyKeyValue, null ), false );
 } );
 let infoPageObject = new Info( new ModuleRequest( '', '', emptyKeyValue, null ), new Extra( [ new Commands( '', emptyKeyValue ) ], emptyKeyValue ), new JavascriptConfig( false, false, '' ), new Output( image, title, parsedJson.request, desc, genres, type, status, '', 'Chapters: ' + chapters.length, chapters ) );
+
+let chapters = Array.from(document.querySelector('#list-chaper > .panel-body').querySelectorAll('a')).map(function(data){ return new Chapter( data.textContent.trim(),new ModuleRequest(data.href,'get', emptyKeyValue, null), false); })
