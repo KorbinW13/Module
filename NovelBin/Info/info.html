@@ -78,7 +78,7 @@ let emptyKeyValue = [new KeyValue('Referer', parsedJson.request.url)];
 
 var chapters = [];
 var output = parsedJson.output;
-let data =
+//let data =
 var type = 'Light Novel';
 var status = getStuff(document.querySelector('.info-meta').querySelectorAll('li'),'Status:');
 var field2 = ''; 
@@ -86,9 +86,10 @@ var genres = getStuff(document.querySelector('.info-meta').querySelectorAll('li'
 var desc = document.querySelector('.desc-text').textContent.trim(); 
 var title = document.querySelector('.title').textContent;
 var image = document.querySelector('.book').querySelector('img').dataset.src;
-image = new ModuleRequest(image,'get',emptyKeyValue,null); 
+image = new ModuleRequest(image,'get',emptyKeyValue,null);
+let chapList = document.querySelector('.panel-body').querySelectorAll('.list-chapter');
 
-//let data = document.querySelector('.info-meta').querySelectorAll('li'); 
+let data = document.querySelector('.info-meta').querySelectorAll('li'); 
 let id = document.querySelector('#rating').getAttribute('data-novel-id');
 
 let infoPageObject = new Info(new ModuleRequest('', '', emptyKeyValue, null), new Extra([new Commands('', emptyKeyValue)], emptyKeyValue), new JavascriptConfig(false, false, ''), new Output(image, title, parsedJson.request, desc, genres, status, 'Anime', type, 'Chapters: '  + chapters.length, chapters));
@@ -153,30 +154,6 @@ var savedData = document.getElementById( 'ketsu-final-data' );
  output.chapters = episodes;
  output.field4 = 'Chapters: ' + chaptersList.length;
  let infoPageObject = new Info( new ModuleRequest( '', 'get', emptyKeyValue, null ), new Extra( [ new Commands( '', emptyKeyValue ) ], emptyKeyValue ), new JavascriptConfig( false, false, '' ), output );
- var finalJson = JSON.stringify( infoPageObject );
- savedData.innerHTML = finalJson;
-
-//Discord code
-var savedData = document.getElementById( 'ketsu-final-data' );
- var parsedJson = JSON.parse( savedData.innerHTML );
- let emptyKeyValue = [ new KeyValue( 'Referer', parsedJson.request.url ) ];
- var episodes = [ ];
- var type = 'Light Novel';
- var status = 'Unknown';
- var field2 = '';
- var genres = [ ];
- var desc = '';
- var title = '';
- var image = '';
- let data = document.querySelector( '.info-meta' ).querySelectorAll( 'li' );
- genres = getStuff( data, 'Genre:' ).split( ', ' );
- status = getStuff( data, 'Status:' );
- desc = document.querySelector( '.desc-text' ).textContent.trim( );
- title = document.querySelector( '.title' ).textContent;
- image = document.querySelector( '.book' ).querySelector( 'img' ).src;
- image = new ModuleRequest( image, 'get', emptyKeyValue, null );
- let id = document.querySelector( '#rating' ).getAttribute( 'data-novel-id' );
- let infoPageObject = new Info( new ModuleRequest( 'https://readnovelfull.com/ajax/chapter-archive?novelId=' + id, 'get', emptyKeyValue, null ), new Extra( [ new Commands( '', emptyKeyValue ) ], emptyKeyValue ), new JavascriptConfig( false, false, '' ), new Output( image, title, parsedJson.request, desc, genres, status, field2, type, 'Chapters: ' + episodes.length, episodes ) );
  var finalJson = JSON.stringify( infoPageObject );
  savedData.innerHTML = finalJson;
 

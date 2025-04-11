@@ -231,26 +231,8 @@ const DefaultLayouts = {
         let field1 = result.querySelector('.chr-text').textContent; 
         dataArray.push(quickData(link,img,title,field1)); 
     }
-
-    var lastAdded = document.querySelector('.direlist').querySelectorAll('li'); let lastAddedArray = []; 
-    for (var x = 0; x < lastAdded.length;x++) { 
-        try { var last = lastAdded[x]; 
-            var image = last.querySelector('img').src; 
-            image = new ModuleRequest(image,'get',emptyKeyValue,null); 
-            let title = last.querySelector('.bookname').innerText; 
-            var link = last.querySelector('a').href + '?waring=1'; 
-            link = new ModuleRequest(link,'get',emptyKeyValue,null); 
-            var extra = last.querySelectorAll('span'); 
-            var visitas = last.querySelectorAll('span'); 
-            visitas = visitas[visitas.length - 1].innerHTML; 
-            let data = new Data(image,title,visitas,'Manga','','This is the description','This is the description',false,link); 
-            lastAddedArray.push(data); } catch (e) {} 
-        }  
-
     var testLayout = new Layout(new Insets(10,10,10,10),1,2,3,1,500,new Size(400,400),new Ratio('width',4,11),new Size(0,0),10,10);
     output.push(new Output(CellDesings.wide8, Orientation.vertical, DefaultLayouts.none, Paging.none, new Section('' , false), testLayout, dataArray));
-
-
 
     let searchPageObject = new Search(new ModuleRequest('','',emptyKeyValue,null),new Extra([new Commands('',emptyKeyValue)],emptyKeyValue),'',new JavascriptConfig(true,false,''),output);
 
