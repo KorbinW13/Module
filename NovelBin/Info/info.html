@@ -89,14 +89,14 @@ var image = document.querySelector('.book').querySelector('img').dataset.src;
 image = new ModuleRequest(image,'get',emptyKeyValue,null);
 let chapList = document.querySelector('.panel-body').querySelectorAll('.list-chapter').querySelectorAll('li');
 for (chap of chapList) {
-    let chapName = chap.querySelector();
+    let chapName = chap.querySelector('a').textContent.trim();
     let chapLink = chap.querySelector('a').href;
     let chapter = new Chapter(chapName,new ModuleRequest(chapLink,'get',emptyKeyValue,null),false);
     chapters.push(chapter);
 }
 
-let data = document.querySelector('.info-meta').querySelectorAll('li'); 
-let id = document.querySelector('#rating').getAttribute('data-novel-id');
+//let data = document.querySelector('.info-meta').querySelectorAll('li'); 
+//let id = document.querySelector('#rating').getAttribute('data-novel-id');
 
 let infoPageObject = new Info(new ModuleRequest('', '', emptyKeyValue, null), new Extra([new Commands('', emptyKeyValue)], emptyKeyValue), new JavascriptConfig(false, false, ''), new Output(image, title, parsedJson.request, desc, genres, status, 'Anime', type, 'Chapters: '  + chapters.length, chapters));
 var finalJson = JSON.stringify(infoPageObject);
