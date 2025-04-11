@@ -87,7 +87,13 @@ var desc = document.querySelector('.desc-text').textContent.trim();
 var title = document.querySelector('.title').textContent;
 var image = document.querySelector('.book').querySelector('img').dataset.src;
 image = new ModuleRequest(image,'get',emptyKeyValue,null);
-let chapList = document.querySelector('.panel-body').querySelectorAll('.list-chapter');
+let chapList = document.querySelector('.panel-body').querySelectorAll('.list-chapter').querySelectorAll('li');
+for (chap of chapList) {
+    let chapName = chap.querySelector();
+    let chapLink = chap.querySelector('a').href;
+    let chapter = new Chapter(chapName,new ModuleRequest(chapLink,'get',emptyKeyValue,null),false);
+    chapters.push(chapter);
+}
 
 let data = document.querySelector('.info-meta').querySelectorAll('li'); 
 let id = document.querySelector('#rating').getAttribute('data-novel-id');
@@ -100,8 +106,10 @@ savedData.innerHTML = finalJson;
 let chapList = document.querySelectorAll('#list-chapter > li'); 
 for (chap of chapList){ 
     let chapLink = chap.querySelector('a').href; 
-    let chapName = chap.querySelector('#chapter-title').textContent.trim(); let chapter = new Chapter(chapName,new ModuleRequest(chapLink,'get',emptyKeyValue,null),false); chapters.push(chapter); };
-
+    let chapName = chap.querySelector('#chapter-title').textContent.trim(); 
+    let chapter = new Chapter(chapName,new ModuleRequest(chapLink,'get',emptyKeyValue,null),false);
+    chapters.push(chapter); 
+};
 
 {}var chaptersArray = document.querySelector('.silde').querySelectorAll('li');
 for (var x = 0; x < chaptersArray.length; x++) { 
